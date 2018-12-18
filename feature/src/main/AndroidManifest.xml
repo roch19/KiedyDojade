@@ -16,6 +16,8 @@
         <activity android:name=".Sensors.SensorList"/>
         <activity android:name=".Sensors.ProximitySensor"/>
         <activity android:name=".Sensors.Accelerometer"/>
+        <activity android:name=".EditPost"/>
+
     </application>
 
 </manifest>

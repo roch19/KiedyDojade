@@ -8,6 +8,7 @@
     <string name="datadodania">Data dodania</string>
     <string name="wpisznowy">Wpisz nowy przystanek docelowy</string>
     <string name="sensorname">Accelerometer</string>
+    <string name="empty_not_saved">Document not saved because it is empty.</string>
     <plurals name="sensors_summary_info">
         <item quantity="one">You have only one sensor :(</item>
         <item quantity="other">You have %d sensors. NICE :)</item>

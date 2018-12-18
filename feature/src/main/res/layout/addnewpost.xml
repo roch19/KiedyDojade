@@ -34,6 +34,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Tekst" />
 
+
+    <!--<EditText-->
+        <!--android:id="@+id/edit_word"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:fontFamily="sans-serif-light"-->
+        <!--android:inputType="textAutoComplete"-->
+ <!---->
+        <!--android:textSize="18sp" />-->
+
+
     <ImageButton
         android:id="@+id/confirm"
         android:layout_width="78dp"

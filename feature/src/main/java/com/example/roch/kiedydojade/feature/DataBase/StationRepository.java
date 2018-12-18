@@ -14,7 +14,7 @@ public class StationRepository {
     StationRepository(Application application){
         StacionRoomDatabase db = StacionRoomDatabase.getDatabase(application);
         smDao = db.stacionDao();
-        myAllStation = smDao.getAllStacionModels();
+        myAllStation = smDao.getAll();
     }
 
     LiveData<List<StacionModels>> getMyAllStation(){
@@ -24,6 +24,17 @@ public class StationRepository {
     public void insert (StacionModels sm){
          new insertAsyncTask(smDao).execute(sm);
     }
+
+    public void delete (StacionModels sm) {new deleteAsyncTask(smDao).execute(sm);}
+
+    public void update (StacionModels sm) {new updateAsyncTask(smDao).execute(sm);}
+
+
+
+
+
+
+
 
     private static class insertAsyncTask extends AsyncTask<StacionModels, Void, Void>{
 
@@ -40,5 +51,30 @@ public class StationRepository {
         }
     }
 
+    private static class updateAsyncTask extends AsyncTask<StacionModels, Void, Void>{
+
+        private StationModelsDAO mAsyncTaskDao;
+
+        updateAsyncTask(StationModelsDAO dao) {mAsyncTaskDao = dao;}
+
+        @Override
+        protected Void doInBackground(final StacionModels... params){
+            mAsyncTaskDao.update(params[0]);
+            return null;
+        }
+    }
+
+    private class deleteAsyncTask extends AsyncTask<StacionModels, Void,Void>{
+
+        private StationModelsDAO mAsyncTaskDao;
+
+        deleteAsyncTask(StationModelsDAO dao) {mAsyncTaskDao = dao;}
+        @Override
+        protected Void doInBackground(final StacionModels... params){
+            mAsyncTaskDao.delete(params[0]);
+            return null;
+        }
+
+    }
 
 }

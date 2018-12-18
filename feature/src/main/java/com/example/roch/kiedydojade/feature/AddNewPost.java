@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,15 +27,20 @@ import java.util.Locale;
 
 public class AddNewPost extends AppCompatActivity
 {
+    public static final String EXTRA_REPLY = "newActivity";
+
     public ArrayList<String> AddNewPostitemList = new ArrayList<>();
     private EditText dateEditText;
     private EditText billEditText;
-    public String tekstDoWyslania;
+    private EditText tekstDoWyslania;
     private EditText todoEditText;
     private ImageButton confirmButton;
     private ImageButton mapButton;
     private ImageButton language;
     private ImageButton back;
+
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +59,24 @@ public class AddNewPost extends AppCompatActivity
         dateEditText.setText(getCurrentDate());
         language = (ImageButton) findViewById(R.id.lang);
         back = (ImageButton) findViewById(R.id.back);
+
+        tekstDoWyslania = (EditText) findViewById(R.id.new_localization);
+
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent replyIntent = new Intent();
+                if(TextUtils.isEmpty(tekstDoWyslania.getText())){
+                    setResult(RESULT_CANCELED, replyIntent);
+                } else {
+                    String word = tekstDoWyslania.getText().toString();
+                    replyIntent.putExtra(EXTRA_REPLY, word);
+                    setResult(RESULT_OK, replyIntent);
+                }
+                finish();
+            }
+        });
 
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,22 +97,24 @@ public class AddNewPost extends AppCompatActivity
 
             }
         });
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {   AddNewPostitemList = (ArrayList<String>) getIntent().getSerializableExtra("itemList");
+//        confirmButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v)
+//            {   AddNewPostitemList = (ArrayList<String>) getIntent().getSerializableExtra("itemList");
+//
+//             //   AddNewPostitemList.add("Dodano:"+dateEditText.getText().toString()+" Treść:"+todoEditText.getText().toString());
+//                tekstDoWyslania="Dodano:"+dateEditText.getText().toString()+" Treść:"+todoEditText.getText().toString();
+//
+//
+//                Intent returnIntent = new Intent();
+//               // returnIntent.putExtra("AddNewPostitemList", AddNewPostitemList);
+//                returnIntent.putExtra("AddNewPostitemList", tekstDoWyslania);
+//                setResult(Activity.RESULT_OK,returnIntent);
+//                finish();
+//            }
+//        });
 
-             //   AddNewPostitemList.add("Dodano:"+dateEditText.getText().toString()+" Treść:"+todoEditText.getText().toString());
-                tekstDoWyslania="Dodano:"+dateEditText.getText().toString()+" Treść:"+todoEditText.getText().toString();
 
-
-                Intent returnIntent = new Intent();
-               // returnIntent.putExtra("AddNewPostitemList", AddNewPostitemList);
-                returnIntent.putExtra("AddNewPostitemList", tekstDoWyslania);
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
-            }
-        });
 
         language.setOnClickListener(new View.OnClickListener() {
             @Override
